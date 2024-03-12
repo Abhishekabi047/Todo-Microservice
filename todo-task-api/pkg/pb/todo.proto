@@ -1,0 +1,68 @@
+syntax = "proto3";
+
+package todo;
+
+option go_package="./pkg/pb";
+
+service TodoService{
+    rpc CreateTask(CreateTaskRequest) returns (CreateTaskResponse) {}
+    rpc DeleteTask(DeleteTaskRequest) returns (DeleteTaskResponse) {}
+    rpc CompleteList(CompleteListRequest) returns (CompleteListResponse) {}
+    rpc ListTask(ListRequest) returns (ListResponse) {}
+    rpc Complete(CompleteRequest) returns (CompleteResponse) {}
+}
+
+message CreateTaskRequest{
+    string task =1;
+    string description =2;
+    bool done=3;
+}
+
+message FindOne{
+    int64 id=1;
+    string task=2;
+    string description=3;
+    bool done=4;
+}
+
+message CreateTaskResponse{
+    int64 status =1;
+    string error =2;
+}
+
+message DeleteTaskRequest{
+    int64 id=1;
+}
+
+message DeleteTaskResponse{
+    int64 status =1;
+    string error =2;
+}
+
+message CompleteListRequest{
+
+}
+
+message CompleteListResponse{
+    int64 status =1;
+    string error =2;
+    repeated FindOne data =3;
+}
+
+message ListRequest {}
+
+message ListResponse{
+    int64 status =1;
+    string error=2;
+    repeated FindOne data=3;
+}
+
+message CompleteRequest{
+    int64 id=1;
+}
+
+message CompleteResponse{
+    int64 status =1;
+    string error=2;
+    FindOne data=3;
+}
